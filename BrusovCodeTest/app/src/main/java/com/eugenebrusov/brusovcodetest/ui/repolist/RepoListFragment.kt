@@ -3,11 +3,13 @@ package com.eugenebrusov.brusovcodetest.ui.repolist
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.eugenebrusov.brusovcodetest.R
+import kotlinx.android.synthetic.main.fragment_repo_list.*
 
 /**
  * Displays repo list
@@ -23,5 +25,13 @@ class RepoListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_repo_list, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val adapter = RepoListAdapter()
+        recyclerView.adapter = adapter
+    }
 }

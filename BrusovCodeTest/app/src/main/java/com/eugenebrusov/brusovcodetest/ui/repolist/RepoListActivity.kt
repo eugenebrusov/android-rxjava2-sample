@@ -1,8 +1,12 @@
-package com.eugenebrusov.brusovcodetest
+package com.eugenebrusov.brusovcodetest.ui.repolist
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.eugenebrusov.brusovcodetest.R
 
+/**
+ * Displays repo list
+ */
 class RepoListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

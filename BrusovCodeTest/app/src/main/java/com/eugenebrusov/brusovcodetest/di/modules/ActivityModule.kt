@@ -1,6 +1,6 @@
 package com.eugenebrusov.brusovcodetest.di.modules
 
-import com.eugenebrusov.brusovcodetest.RepoListActivity
+import com.eugenebrusov.brusovcodetest.ui.repolist.RepoListActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

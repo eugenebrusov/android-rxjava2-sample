@@ -3,6 +3,7 @@ package com.eugenebrusov.brusovcodetest.di
 import android.app.Application
 import com.eugenebrusov.brusovcodetest.App
 import com.eugenebrusov.brusovcodetest.di.modules.ActivityModule
+import com.eugenebrusov.brusovcodetest.di.modules.ViewModelModule
 import com.eugenebrusov.brusovcodetest.di.modules.AppModule
 import dagger.BindsInstance
 import dagger.Component
@@ -13,8 +14,9 @@ import javax.inject.Singleton
 @Component(
         modules = [
             AndroidInjectionModule::class,
-            ActivityModule::class,
-            AppModule::class]
+            AppModule::class,
+            ViewModelModule::class,
+            ActivityModule::class]
 )
 interface AppComponent {
     @Component.Builder

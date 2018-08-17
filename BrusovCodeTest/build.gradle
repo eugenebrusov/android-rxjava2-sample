@@ -30,5 +30,7 @@ ext {
     supportVersion = '27.1.1'
     daggerVersion = '2.15'
     archLifecycleVersion = '1.1.1'
+    rxJavaVersion = '2.2.0'
+    rxAndroidVersion = '2.0.2'
     retrofitVersion = '2.3.0'
 }

@@ -94,6 +94,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
                 val now = System.currentTimeMillis()
 
                 itemView.updatedTextView.text = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
+                itemView.starsTextView.text = "${value?.stars}"
             }
 
         companion object {

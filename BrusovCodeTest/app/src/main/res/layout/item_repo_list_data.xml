@@ -47,4 +47,24 @@
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
         tools:text="Updated" />
 
+    <ImageView
+        android:id="@+id/starImageView"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/updatedTextView"
+        app:layout_constraintStart_toEndOf="@+id/updatedTextView"
+        app:layout_constraintTop_toTopOf="@+id/updatedTextView"
+        app:srcCompat="@drawable/ic_star_black_24dp" />
+
+    <TextView
+        android:id="@+id/starsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/starImageView"
+        app:layout_constraintStart_toEndOf="@+id/starImageView"
+        app:layout_constraintTop_toTopOf="@+id/starImageView"
+        tools:text="Stars" />
+
 </android.support.constraint.ConstraintLayout>

@@ -10,6 +10,7 @@ import com.eugenebrusov.brusovcodetest.R
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -31,15 +32,6 @@ class RepoListActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(RepoListViewModel::class.java)
-
-        viewModel.repoList
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ jsonResults ->
-                    Log.e("repoList", "jsonResults $jsonResults")
-                }, { throwable ->
-                    Log.e("repoList", "throwable $throwable")
-                })
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

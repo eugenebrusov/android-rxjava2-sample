@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BrusovCodeTest</string>
+
+    <string name="button_retry">Retry</string>
 </resources>

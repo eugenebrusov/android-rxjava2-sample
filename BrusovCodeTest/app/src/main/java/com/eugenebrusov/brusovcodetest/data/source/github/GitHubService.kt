@@ -8,6 +8,6 @@ import retrofit2.http.GET
  * GitHub API access points
  */
 interface GithubService {
-    @GET("search/repositories?q=android+language:kotlin&sort=stars&order=desc&page=1&per_page=10")
+    @GET("search/repositories?q=android+language:kotlin&sort=stars&page=1&per_page=20")
     fun searchRepos(): Flowable<Repos>
 }

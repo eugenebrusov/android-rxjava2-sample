@@ -8,5 +8,5 @@ import javax.inject.Singleton
 class AppRepository @Inject constructor(
         private val githubService: GithubService
 ) {
-    fun getRepoList() = githubService.searchRepos()
+    fun loadPage(page: Int) = githubService.searchRepos()
 }

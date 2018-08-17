@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.eugenebrusov.brusovcodetest.R
+import com.eugenebrusov.brusovcodetest.di.Injectable
 import kotlinx.android.synthetic.main.fragment_repo_list.view.*
 
 /**
  * Displays repo list
  *
- * I added this fragment to re-use it in different layout configurations
+ * Fragments were added to re-use their UI in different layout configurations
  * as it's recommended on https://developer.android.com/guide/components/fragments
  */
-class RepoListFragment : Fragment() {
+class RepoListFragment : Fragment(), Injectable {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

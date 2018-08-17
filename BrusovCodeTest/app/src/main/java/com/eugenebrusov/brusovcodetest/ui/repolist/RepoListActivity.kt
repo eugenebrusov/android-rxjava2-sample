@@ -3,9 +3,12 @@ package com.eugenebrusov.brusovcodetest.ui.repolist
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.eugenebrusov.brusovcodetest.R
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -13,7 +16,9 @@ import javax.inject.Inject
 /**
  * Displays repo list
  */
-class RepoListActivity : AppCompatActivity() {
+class RepoListActivity : AppCompatActivity(), HasSupportFragmentInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -36,4 +41,6 @@ class RepoListActivity : AppCompatActivity() {
                     Log.e("repoList", "throwable $throwable")
                 })
     }
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

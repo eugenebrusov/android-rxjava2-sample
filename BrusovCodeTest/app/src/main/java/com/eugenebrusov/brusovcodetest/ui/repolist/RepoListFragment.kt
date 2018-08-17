@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,9 +40,16 @@ class RepoListFragment : Fragment(), Injectable {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_repo_list, container, false)
 
+
+
         val recyclerView = view.recyclerView
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = linearLayoutManager
+
+        val itemDecoration = DividerItemDecoration(context, linearLayoutManager.orientation)
+        recyclerView.addItemDecoration(itemDecoration)
 
         return view
     }

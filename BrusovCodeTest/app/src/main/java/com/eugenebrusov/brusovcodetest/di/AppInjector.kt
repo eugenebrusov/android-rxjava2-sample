@@ -3,8 +3,13 @@ package com.eugenebrusov.brusovcodetest.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import com.eugenebrusov.brusovcodetest.App
 import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
 
 object AppInjector {
     fun init(app: App) {
@@ -12,7 +17,7 @@ object AppInjector {
                 .build().inject(app)
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                AndroidInjection.inject(activity)
+                handleActivity(activity)
             }
 
             override fun onActivityStarted(activity: Activity) {
@@ -39,5 +44,27 @@ object AppInjector {
 
             }
         })
+    }
+
+    private fun handleActivity(activity: Activity) {
+        if (activity is HasSupportFragmentInjector) {
+            AndroidInjection.inject(activity)
+        }
+        if (activity is FragmentActivity) {
+            activity.supportFragmentManager
+                    .registerFragmentLifecycleCallbacks(
+                            object : FragmentManager.FragmentLifecycleCallbacks() {
+                                override fun onFragmentCreated(
+                                        fm: FragmentManager,
+                                        f: Fragment,
+                                        savedInstanceState: Bundle?
+                                ) {
+                                    if (f is Injectable) {
+                                        AndroidSupportInjection.inject(f)
+                                    }
+                                }
+                            }, true
+                    )
+        }
     }
 }

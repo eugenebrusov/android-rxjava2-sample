@@ -4,6 +4,7 @@ import android.app.Application
 import com.eugenebrusov.brusovcodetest.App
 import com.eugenebrusov.brusovcodetest.di.modules.ActivityModule
 import com.eugenebrusov.brusovcodetest.di.modules.ViewModelModule
+import com.eugenebrusov.brusovcodetest.di.modules.AppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -15,6 +16,7 @@ import javax.inject.Singleton
             AndroidInjectionModule::class,
             ActivityModule::class,
             ViewModelModule::class]
+            AppModule::class]
 )
 interface AppComponent {
     @Component.Builder

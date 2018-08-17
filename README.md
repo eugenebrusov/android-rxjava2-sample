@@ -20,6 +20,6 @@ Screenshots
 -----------
 
 <p align="center">
-    <img src="hhttps://user-images.githubusercontent.com/23726864/44283134-1d7e9900-a266-11e8-908b-7aac10db7a6f.png" 
+    <img src="https://user-images.githubusercontent.com/23726864/44283134-1d7e9900-a266-11e8-908b-7aac10db7a6f.png" 
          alt="A screenshot illustratrating the UI of the app" width="360" />
 </p>

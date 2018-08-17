@@ -7,9 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.eugenebrusov.brusovcodetest.R
-import kotlinx.android.synthetic.main.fragment_repo_list.*
 import kotlinx.android.synthetic.main.fragment_repo_list.view.*
 
 /**
@@ -33,11 +31,5 @@ class RepoListFragment : Fragment() {
         recyclerView.adapter = adapter
 
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
     }
 }

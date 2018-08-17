@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.repolist.RepoListActivity">
+    tools:context=".ui.repodetail.RepoDetailActivity">
 
-    <fragment android:name="com.eugenebrusov.brusovcodetest.ui.repolist.RepoListFragment"
+    <fragment android:name="com.eugenebrusov.brusovcodetest.ui.repodetail.RepoDetailFragment"
         android:id="@+id/repo_list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.eugenebrusov.brusovcodetest.ui.repolist
 
 import android.arch.lifecycle.ViewModel
+import com.eugenebrusov.brusovcodetest.data.model.Repo
 import com.eugenebrusov.brusovcodetest.data.model.Resource.Companion.error
 import com.eugenebrusov.brusovcodetest.data.model.Resource.Companion.loading
 import com.eugenebrusov.brusovcodetest.data.model.Resource.Companion.success
@@ -29,7 +30,13 @@ class RepoListViewModel @Inject constructor(
                         .startWith(loading())
             }
 
+    val selectedRepoSubject: PublishSubject<Repo> = PublishSubject.create()
+
     fun loadPage(page: Int) {
         pageSubject.onNext(page)
+    }
+
+    fun selectRepo(repo: Repo) {
+        selectedRepoSubject.onNext(repo)
     }
 }

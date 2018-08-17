@@ -13,6 +13,10 @@ import com.eugenebrusov.brusovcodetest.data.model.Resource.Companion.loading
 import com.eugenebrusov.brusovcodetest.data.model.Status.*
 import kotlinx.android.synthetic.main.item_repo_list_data.view.*
 import kotlinx.android.synthetic.main.item_repo_list_error.view.*
+import android.text.format.DateUtils
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
@@ -85,7 +89,16 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
                 field = value
                 itemView.fullNameTextView.text = value?.fullName
                 itemView.descriptionTextView.text = value?.description
+
+                val time = DataViewHolder.dateFormatInstance.parse(value?.updatedAt).time
+                val now = System.currentTimeMillis()
+
+                itemView.updatedTextView.text = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
             }
+
+        companion object {
+            val dateFormatInstance = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+        }
     }
 
     class ErrorViewHolder(

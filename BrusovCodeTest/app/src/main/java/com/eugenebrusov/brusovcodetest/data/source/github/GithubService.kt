@@ -8,7 +8,7 @@ import retrofit2.http.Query
 /**
  * GitHub API access points
  */
-interface GithubServicer {
+interface GithubService {
     @GET("search/repositories")
     fun searchRepos(@Query("q") query: String,
                     @Query("page") page: Int,

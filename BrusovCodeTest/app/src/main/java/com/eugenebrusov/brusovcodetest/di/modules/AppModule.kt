@@ -1,6 +1,6 @@
 package com.eugenebrusov.brusovcodetest.di.modules
 
-import com.eugenebrusov.brusovcodetest.data.source.github.GithubServicer
+import com.eugenebrusov.brusovcodetest.data.source.github.GithubService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -17,5 +17,5 @@ class AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-            .create(GithubServicer::class.java)
+            .create(GithubService::class.java)
 }

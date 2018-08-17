@@ -24,6 +24,8 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
     var onPageRequested: ((page: Int) -> Unit)? = null
 
+    var onRepoSelected: ((repo: Repo) -> Unit)? = null
+
     var resource: Resource<Repos> = loading()
         set(value) {
             if (SUCCESS == value.status && value.data != null) {
@@ -46,7 +48,11 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is DataViewHolder) {
-            holder.data = repoList[position]
+            val repo = repoList[position]
+            holder.data = repo
+            holder.itemView.setOnClickListener {
+                onRepoSelected?.invoke(repo)
+            }
         } else if (holder is ErrorViewHolder) {
             holder.error = resource.error
         }

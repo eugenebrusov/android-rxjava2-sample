@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,18 +52,18 @@ class RepoListFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)
                 .get(RepoListViewModel::class.java)
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         val adapter = RepoListAdapter()
         recyclerView.adapter = adapter
 
         adapter.onPageRequested = { page ->
             viewModel.loadPage(page)
+        }
+
+        adapter.onRepoSelected = { repo ->
+            viewModel.selectRepo(repo)
         }
 
         disposable.add(viewModel.reposResourceFlowable
@@ -72,8 +73,8 @@ class RepoListFragment : Fragment(), Injectable {
                 }))
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
         disposable.clear()
+        super.onDestroy()
     }
 }

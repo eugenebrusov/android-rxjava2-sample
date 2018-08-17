@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">BrusovCodeTest</string>
 
+    <string name="title_repo_list">List</string>
+    <string name="title_repo_details">Details</string>
+
     <string name="button_retry">Retry</string>
+
+    <string name="details_title">Title</string>
+    <string name="details_description">Description</string>
+    <string name="details_link">Link</string>
+    <string name="details_updated">Updated</string>
+    <string name="details_stars">Stars</string>
 </resources>

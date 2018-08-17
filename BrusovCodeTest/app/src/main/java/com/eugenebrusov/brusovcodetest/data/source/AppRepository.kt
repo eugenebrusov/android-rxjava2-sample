@@ -1,10 +1,12 @@
 package com.eugenebrusov.brusovcodetest.data.source
 
-import com.eugenebrusov.brusovcodetest.data.source.github.GitHubService
+import com.eugenebrusov.brusovcodetest.data.source.github.GithubService
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AppRepository @Inject constructor(
-        private val gitHubService: GitHubService
-)
+        private val githubService: GithubService
+) {
+    fun getRepoList() = githubService.searchRepos()
+}

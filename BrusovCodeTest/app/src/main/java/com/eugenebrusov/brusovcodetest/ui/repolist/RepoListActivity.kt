@@ -2,9 +2,12 @@ package com.eugenebrusov.brusovcodetest.ui.repolist
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.eugenebrusov.brusovcodetest.R
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -23,5 +26,14 @@ class RepoListActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(RepoListViewModel::class.java)
+
+        viewModel.repoList
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ jsonResults ->
+                    Log.e("repoList", "jsonResults $jsonResults")
+                }, { throwable ->
+                    Log.e("repoList", "throwable $throwable")
+                })
     }
 }

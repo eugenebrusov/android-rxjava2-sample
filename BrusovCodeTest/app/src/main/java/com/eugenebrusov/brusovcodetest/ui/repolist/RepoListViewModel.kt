@@ -4,4 +4,8 @@ import android.arch.lifecycle.ViewModel
 import com.eugenebrusov.brusovcodetest.data.source.AppRepository
 import javax.inject.Inject
 
-class RepoListViewModel @Inject constructor(val appRepository: AppRepository) : ViewModel()
+class RepoListViewModel @Inject constructor(
+        private val appRepository: AppRepository
+) : ViewModel() {
+    val repoList = appRepository.getRepoList()
+}

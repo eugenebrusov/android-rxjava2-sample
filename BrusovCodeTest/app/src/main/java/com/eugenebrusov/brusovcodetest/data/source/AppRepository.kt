@@ -1,5 +1,6 @@
 package com.eugenebrusov.brusovcodetest.data.source
 
+import com.eugenebrusov.brusovcodetest.DEFAULT_PAGE_SIZE
 import com.eugenebrusov.brusovcodetest.data.source.github.GithubService
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -8,5 +9,6 @@ import javax.inject.Singleton
 class AppRepository @Inject constructor(
         private val githubService: GithubService
 ) {
-    fun loadPage(page: Int) = githubService.searchRepos()
+    fun loadRepositories(page: Int) =
+        githubService.searchRepos("android+language:kotlin", page, DEFAULT_PAGE_SIZE)
 }

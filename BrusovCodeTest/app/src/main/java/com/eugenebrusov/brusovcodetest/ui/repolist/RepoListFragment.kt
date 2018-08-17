@@ -1,13 +1,11 @@
 package com.eugenebrusov.brusovcodetest.ui.repolist
 
-
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +13,6 @@ import com.eugenebrusov.brusovcodetest.R
 import com.eugenebrusov.brusovcodetest.di.Injectable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 import kotlinx.android.synthetic.main.fragment_repo_list.view.*
 import javax.inject.Inject
@@ -37,10 +34,7 @@ class RepoListFragment : Fragment(), Injectable {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_repo_list, container, false)
-
-
 
         val recyclerView = view.recyclerView
         recyclerView.setHasFixedSize(true)
@@ -67,8 +61,11 @@ class RepoListFragment : Fragment(), Injectable {
         val adapter = RepoListAdapter()
         recyclerView.adapter = adapter
 
+        adapter.onPageRequested = { page ->
+            viewModel.loadPage(page)
+        }
+
         disposable.add(viewModel.reposResourceFlowable
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ resource ->
                     adapter.resource = resource

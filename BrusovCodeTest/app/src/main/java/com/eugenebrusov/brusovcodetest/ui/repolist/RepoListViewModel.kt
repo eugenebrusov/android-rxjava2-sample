@@ -6,6 +6,7 @@ import com.eugenebrusov.brusovcodetest.data.model.Resource.Companion.loading
 import com.eugenebrusov.brusovcodetest.data.model.Resource.Companion.success
 import com.eugenebrusov.brusovcodetest.data.source.AppRepository
 import io.reactivex.BackpressureStrategy
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
@@ -18,8 +19,9 @@ class RepoListViewModel @Inject constructor(
     val reposResourceFlowable = pageSubject
             .startWith(1)
             .toFlowable(BackpressureStrategy.MISSING)
+            .observeOn(Schedulers.io())
             .switchMap { page ->
-                appRepository.loadPage(page)
+                appRepository.loadRepositories(page)
                         .map { repos ->
                             success(repos)
                         }
@@ -27,7 +29,7 @@ class RepoListViewModel @Inject constructor(
                         .startWith(loading())
             }
 
-    fun retry() {
-        pageSubject.onNext(1)
+    fun loadPage(page: Int) {
+        pageSubject.onNext(page)
     }
 }

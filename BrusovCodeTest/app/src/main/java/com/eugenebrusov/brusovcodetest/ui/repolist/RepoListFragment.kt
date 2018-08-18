@@ -66,6 +66,7 @@ class RepoListFragment : Fragment(), Injectable {
             viewModel.selectRepo(repo)
         }
 
+        // Subscribes for data updates coming from GitHub API
         disposable.add(viewModel.reposResourceFlowable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ resource ->

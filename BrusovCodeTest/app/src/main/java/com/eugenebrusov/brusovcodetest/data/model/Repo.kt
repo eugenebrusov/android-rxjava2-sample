@@ -4,6 +4,9 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Exposes repo info
+ */
 @Parcelize
 data class Repo(@SerializedName("full_name") val fullName: String,
                 val description: String,

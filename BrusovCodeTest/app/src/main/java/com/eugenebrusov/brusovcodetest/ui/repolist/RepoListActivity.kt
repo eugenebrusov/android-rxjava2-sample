@@ -37,8 +37,11 @@ class RepoListActivity : AppCompatActivity(), HasSupportFragmentInjector {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(RepoListViewModel::class.java)
 
+        // Communication between components is done either through a shared ViewModel
+        // as it's recommended here https://developer.android.com/training/basics/fragments/communicating
         disposable.add(viewModel.selectedRepoSubject
                 .subscribe { repo ->
+                    // Once user selects repo in list RepoListFragment notifies RepoListActivity via PublishSubject
                     val intent = Intent(this@RepoListActivity, RepoDetailActivity::class.java)
                     intent.putExtra(EXTRA_REPO, repo)
                     this@RepoListActivity.startActivity(intent)

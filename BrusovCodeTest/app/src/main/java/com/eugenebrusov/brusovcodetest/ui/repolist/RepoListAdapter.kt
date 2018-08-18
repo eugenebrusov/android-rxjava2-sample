@@ -20,12 +20,16 @@ import java.util.*
 
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
+    // Holds list of repositories
     private val repoList = mutableListOf<Repo>()
 
+    // This lambda is invoked once list reaches its end
     var onPageRequested: ((page: Int) -> Unit)? = null
 
+    // This lambda is invoked once user taps on item in repo list
     var onRepoSelected: ((repo: Repo) -> Unit)? = null
 
+    // Holds Resource<Repos> which exposes current loading state with data or error
     var resource: Resource<Repos> = loading()
         set(value) {
             if (SUCCESS == value.status && value.data != null) {
@@ -35,6 +39,8 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
+    // Creates respective ViewHolder by given viewType
+    // viewType is represented by layout resId
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             when (viewType) {
                 R.layout.item_repo_list_data -> DataViewHolder(parent)
@@ -57,6 +63,8 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
             holder.error = resource.error
         }
 
+        // If current nothing is currently loading and list scrolled to its last position
+        // then calcualte nextPage number then initiate next page request via onPageRequested lambda
         if (SUCCESS == resource.status && position >= itemCount - 1) {
             val nextPage = repoList.size / DEFAULT_PAGE_SIZE + 1
             onPageRequested?.invoke(nextPage)
@@ -87,6 +95,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
         : RecyclerView.ViewHolder(
             LayoutInflater.from(parent?.context).inflate(resId, parent, false))
 
+    // Holds view that represents repo data
     class DataViewHolder(
             val parent: ViewGroup
     ) : ViewHolder(parent, R.layout.item_repo_list_data) {
@@ -108,6 +117,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
         }
     }
 
+    // Holds view that represents error from GitHub API
     class ErrorViewHolder(
             val parent: ViewGroup, val onRetryListener: View.OnClickListener
     ) : ViewHolder(parent, R.layout.item_repo_list_error) {
@@ -119,6 +129,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
             }
     }
 
+    // Holds view that shows loading spinner while API request is in process
     class LoadingViewHolder(
             val parent: ViewGroup
     ) : ViewHolder(parent, R.layout.item_repo_list_loading)
